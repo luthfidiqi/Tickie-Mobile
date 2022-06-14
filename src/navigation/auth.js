@@ -5,6 +5,8 @@ const Stack = createNativeStackNavigator();
 
 import Login from '../screen/Login';
 import Register from '../screen/Register';
+import ViewAll from '../screen/ViewAll';
+import MovieDetail from '../screen/MovieDetail';
 
 export default function AuthNavigator() {
   return (
@@ -23,6 +25,21 @@ export default function AuthNavigator() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        component={ViewAll}
+        name="ViewAll"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={MovieDetail}
+        name="MovieDetail"
+        options={{
+          headerShown: false,
+        }}
+      />
+
     </Stack.Navigator>
   );
 }

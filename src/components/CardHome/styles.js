@@ -7,6 +7,8 @@ export default StyleSheet.create({
     borderRadius: 8,
     alignItems: 'center',
     padding:16,
+    borderWidth: 1,
+    borderColor: '#DEDEDE',
   },
   btnCard: {
     backgroundColor: '#FFFFFF', 

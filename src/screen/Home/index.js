@@ -3,10 +3,20 @@ import {View, TouchableOpacity, ScrollView, Text, Image, Button,TextInput,} from
 import styles from './styles';
 
 import CardHome from "../../components/CardHome";
+import Footer from "../../components/Footer";
 
-function HomeScreen() {
+function HomeScreen(props) {
   const handleJoin = () => {
   };
+
+  const handleViewAll = () => {
+    props.navigation.navigate('ViewAll');
+  };
+
+  const handleDetail = () => {
+    props.navigation.navigate('MovieDetail');
+  };
+
   
   return (
     <ScrollView style={styles.home}>
@@ -20,8 +30,14 @@ function HomeScreen() {
           <View style={{paddingVertical: 40, paddingHorizontal:24,}}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom:25}}>
             <Text style={{color:'#752EEA', fontSize: 16, fontWeight: 'bold'}}>Now Showing</Text>
-            <Text style={{color:'#5F2EEA', fontSize: 14,}}>view all</Text>
+            <TouchableOpacity onPress={handleViewAll}>
+              <Text style={{color:'#5F2EEA', fontSize: 14,}}>view all</Text>
+            </TouchableOpacity>
             </View>
+            
+            <TouchableOpacity onPress={handleDetail}>
+              <Text style={styles.btnCard}>Details</Text>
+            </TouchableOpacity>
             <ScrollView horizontal={true}>
               <CardHome />
               <CardHome />
@@ -35,8 +51,10 @@ function HomeScreen() {
         <View style={{marginBottom: 50,}}>
           <View style={{paddingVertical: 40, paddingHorizontal:24,}}>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom:25}}>
-            <Text style={{color:'#752EEA', fontSize: 16, fontWeight: 'bold'}}>Upcoming Movies</Text>
-            <Text style={{color:'#5F2EEA', fontSize: 14,}}>view all</Text>
+              <Text style={{color:'#752EEA', fontSize: 16, fontWeight: 'bold'}}>Upcoming Movies</Text>
+              <TouchableOpacity onPress={handleViewAll}>
+                <Text style={{color:'#5F2EEA', fontSize: 14,}}>view all</Text>  
+              </TouchableOpacity>
             </View>
             <ScrollView horizontal={true} style={{marginBottom: 30,}}>
               <Text style={styles.btnDateActive}>September</Text>
@@ -74,38 +92,7 @@ function HomeScreen() {
           </TouchableOpacity>
         </View>
 
-        <View style={{paddingVertical: 50, paddingHorizontal:24,}}>
-          <Image style={{marginBottom: 20}} source={require('../../assets/logo-tickitz-color.png')} />
-          <Text style={{color:'#6E7191', fontSize: 14, marginBottom: 40, lineHeight: 25}}>Stop waiting in line. Buy tickets
-          conveniently, watch movies quietly.</Text>
-          
-          <Text style={{color:'#000000', fontSize: 16, marginBottom: 20}}>Explore</Text>
-          <View style={{flexDirection: 'row'}}>
-            <TouchableOpacity onPress={handleJoin}>
-              <Text style={{color:'#6E7191', fontSize: 14, marginRight: 30}}>Home</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleJoin}>
-              <Text style={{color:'#6E7191', fontSize: 14}}>List Movie</Text>
-            </TouchableOpacity>
-          </View>
-
-          <Text style={{color:'#000000', fontSize: 16, marginTop: 40, marginBottom: 20}}>Our Sponsor</Text>
-          <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
-            <Image style={{marginRight: 20}} source={require('../../assets/ebu.png')} />
-            <Image style={{marginRight: 20}} source={require('../../assets/cineone.png')} />
-            <Image style={{marginRight: 20}} source={require('../../assets/hiflix.png')} />
-          </View>
-
-          <Text style={{color:'#000000', fontSize: 16, marginTop: 40, marginBottom: 20}}>Follow us</Text>
-          <View style={{flexDirection: 'row', alignItems: 'flex-end'}}>
-            <Image style={{marginRight: 30}} source={require('../../assets/facebook.png')} />
-            <Image style={{marginRight: 30}} source={require('../../assets/instagram.png')} />
-            <Image style={{marginRight: 30}} source={require('../../assets/twitter.png')} />
-            <Image style={{marginRight: 30}} source={require('../../assets/youtube.png')} />
-          </View>
-
-          <Text style={{color:'#6E7191', fontSize: 12, marginTop: 60}}>© 2020 Tickitz. All Rights Reserved.</Text>
-        </View>
+        <Footer />
       
     </ScrollView>
   );
