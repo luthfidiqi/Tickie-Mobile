@@ -12,7 +12,10 @@ import Order from '../screen/Order';
 import Checkout from '../screen/Checkout';
 
 import List from '../screen/ViewAll';
+
 import Profile from '../screen/Profile';
+import History from '../screen/Profile/History';
+import Ticket from '../screen/Profile/Ticket';
 
 import DrawerContent from '../components/DrawerContent';
 import Header from '../components/Header';
@@ -63,6 +66,16 @@ function ProfileNavigator() {
       <Stack.Screen
         component={Profile}
         name="Profile"
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        component={History}
+        name="History"
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        component={Ticket}
+        name="Ticket"
         options={{headerShown: false}}
       />
     </Stack.Navigator>

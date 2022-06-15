@@ -54,11 +54,11 @@ function HomeScreen(props) {
               <Text style={styles.btnDate}>December</Text>
             </ScrollView>
             <ScrollView horizontal={true}>
-              <CardHome />
-              <CardHome />
-              <CardHome />
-              <CardHome />
-              <CardHome />
+              <CardHome {...props}/>
+              <CardHome {...props}/>
+              <CardHome {...props}/>
+              <CardHome {...props}/>
+              <CardHome {...props}/>
             </ScrollView>
           </View>
         </View>

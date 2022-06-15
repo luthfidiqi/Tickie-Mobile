@@ -5,7 +5,7 @@ import styles from './styles';
 function Forgot(props) {
 
   const handleSend = () => {
-    props.navigation.navigate('Login');
+    props.navigation.navigate('SetPass');
   };
 
   return (

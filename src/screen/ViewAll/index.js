@@ -5,7 +5,7 @@ import styles from './styles';
 import CardHome from "../../components/CardHome";
 import Footer from "../../components/Footer";
 
-function ViewAll() {
+function ViewAll(props) {
   
   return (
     <ScrollView style={{backgroundColor: 'white', height: '100%',}}>
@@ -21,12 +21,12 @@ function ViewAll() {
               <Text style={styles.btnDate}>December</Text>
             </ScrollView>
             <View style={{flexDirection: 'row', marginBottom: 20}}>
-              <CardHome />
-              <CardHome />
+              <CardHome {...props}/>
+              <CardHome {...props}/>
             </View>
             <View style={{flexDirection: 'row'}}>
-              <CardHome />
-              <CardHome />
+              <CardHome {...props}/>
+              <CardHome {...props}/>
             </View>
           </View>
         </View>
