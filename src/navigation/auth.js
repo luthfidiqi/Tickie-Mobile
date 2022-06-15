@@ -5,8 +5,7 @@ const Stack = createNativeStackNavigator();
 
 import Login from '../screen/Login';
 import Register from '../screen/Register';
-import ViewAll from '../screen/ViewAll';
-import MovieDetail from '../screen/MovieDetail';
+import Forgot from '../screen/Forgot';
 
 export default function AuthNavigator() {
   return (
@@ -26,20 +25,10 @@ export default function AuthNavigator() {
         }}
       />
       <Stack.Screen
-        component={ViewAll}
-        name="ViewAll"
-        options={{
-          headerShown: false,
-        }}
+        component={Forgot}
+        name="Forgot"
+        options={{headerShown: false}}
       />
-      <Stack.Screen
-        component={MovieDetail}
-        name="MovieDetail"
-        options={{
-          headerShown: false,
-        }}
-      />
-
     </Stack.Navigator>
   );
 }

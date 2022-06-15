@@ -10,14 +10,9 @@ function HomeScreen(props) {
   };
 
   const handleViewAll = () => {
-    props.navigation.navigate('ViewAll');
+    props.navigation.navigate('List');
   };
 
-  const handleDetail = () => {
-    props.navigation.navigate('MovieDetail');
-  };
-
-  
   return (
     <ScrollView style={styles.home}>
         <View style={{paddingVertical: 40, paddingHorizontal:24,}}>
@@ -34,16 +29,12 @@ function HomeScreen(props) {
               <Text style={{color:'#5F2EEA', fontSize: 14,}}>view all</Text>
             </TouchableOpacity>
             </View>
-            
-            <TouchableOpacity onPress={handleDetail}>
-              <Text style={styles.btnCard}>Details</Text>
-            </TouchableOpacity>
             <ScrollView horizontal={true}>
-              <CardHome />
-              <CardHome />
-              <CardHome />
-              <CardHome />
-              <CardHome />
+              <CardHome {...props}/>
+              <CardHome {...props}/>
+              <CardHome {...props}/>
+              <CardHome {...props}/>
+              <CardHome {...props}/>
             </ScrollView>
           </View>
         </View>
