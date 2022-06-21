@@ -1,10 +1,38 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, TextInput, ScrollView, TouchableOpacity, Button, Image} from 'react-native';
 import styles from './styles';
 
+import {useDispatch} from 'react-redux';
+import { signUp } from '../../stores/actions/register';
+
 function RegisterScreen(props) {
-  const handleRegister = () => {
-    props.navigation.navigate('Login');
+
+  const dispatch = useDispatch();
+
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+  });
+
+  const handleSubmit = async () => {
+    try {
+      console.log(form);
+
+      await dispatch(signUp(form));
+      props.navigation.navigate('Login');
+
+      alert('Registrasi Berhasil');
+    } catch (error) {
+      console.log(error);
+      alert('Registrasi Gagal');
+    }
+  };
+
+  const handleChangeForm = (text, name) => {
+    setForm({...form, [name]: text});
   };
 
   const handleLogin = () => {
@@ -21,34 +49,39 @@ function RegisterScreen(props) {
         <TextInput 
         style={styles.inputBox}
         placeholder="Write your first name"
+        onChangeText={text => handleChangeForm(text, 'firstName')}
         />
         
         <Text style={{color:'#4E4B66', fontSize: 14, marginBottom:10,}}>Last Name</Text>
         <TextInput 
         style={styles.inputBox}
         placeholder="Write your last name"
+        onChangeText={text => handleChangeForm(text, 'lastName')}
         />
 
         <Text style={{color:'#4E4B66', fontSize: 14, marginBottom:10,}}>Phone Number</Text>
         <TextInput 
         style={styles.inputBox}
         placeholder="Write your phone number"
+        onChangeText={text => handleChangeForm(text, 'phoneNumber')}
         />
 
         <Text style={{color:'#4E4B66', fontSize: 14, marginBottom:10,}}>Email</Text>
         <TextInput 
         style={styles.inputBox}
         placeholder="Write your email"
+        onChangeText={text => handleChangeForm(text, 'email')}
         />
 
         <Text style={{color:'#4E4B66', fontSize: 14, marginBottom:10,}}>Password</Text>
         <TextInput 
         style={styles.inputBox}
         placeholder="Write your password"
+        onChangeText={text => handleChangeForm(text, 'password')}
         />
         
         <View style={{marginTop:20,}}>
-          <Button title="Sign Up" color="#5F2EEA" onPress={handleRegister} />
+          <Button title="Sign Up" color="#5F2EEA" onPress={handleSubmit} />
         </View>
 
         <TouchableOpacity onPress={handleLogin}>

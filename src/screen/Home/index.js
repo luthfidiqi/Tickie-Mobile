@@ -1,6 +1,12 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, TouchableOpacity, ScrollView, Text, Image, Button,TextInput,} from 'react-native';
 import styles from './styles';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {getAllMovie} from '../../stores/actions/movie';
+
+import {useDispatch, useSelector} from 'react-redux';
+import axios from '../../utils/axios';
 
 import CardHome from "../../components/CardHome";
 import Footer from "../../components/Footer";

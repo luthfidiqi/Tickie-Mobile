@@ -1,7 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createDrawerNavigator} from '@react-navigation/drawer';
-// import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/Feather';
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -20,6 +20,7 @@ import Ticket from '../screen/Profile/Ticket';
 import DrawerContent from '../components/DrawerContent';
 import Header from '../components/Header';
 
+import Counter from '../screen/Counter';
 
 function HomeNavigator() {
   return (
@@ -82,6 +83,18 @@ function ProfileNavigator() {
   );
 }
 
+function CounterNavigator() {
+  return (
+    <Stack.Navigator initialRouteName="Counter">
+      <Stack.Screen
+        component={Counter}
+        name="Counter"
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+}
+
 export default function AppNavigator() {
   return (
     <Drawer.Navigator
@@ -95,9 +108,9 @@ export default function AppNavigator() {
         options={{
           title: 'Home',
           header: props => <Header {...props} />,
-          // drawerIcon: ({size, color}) => (
-          //   <Icon name="home" size={size} color={color} />
-          // ),
+          drawerIcon: ({size, color}) => (
+            <Icon name="home" size={size} color={color} />
+          ),
         }}
       />
       <Drawer.Screen
@@ -113,6 +126,14 @@ export default function AppNavigator() {
         name="ProfileNavigator"
         options={{
           title: 'Profile',
+          header: props => <Header {...props} />,
+        }}
+      />
+      <Drawer.Screen
+        component={CounterNavigator}
+        name="CounterNavigator"
+        options={{
+          title: 'Counter',
           header: props => <Header {...props} />,
         }}
       />
