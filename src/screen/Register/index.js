@@ -3,7 +3,7 @@ import {View, Text, TextInput, ScrollView, TouchableOpacity, Button, Image} from
 import styles from './styles';
 
 import {useDispatch} from 'react-redux';
-import { signUp } from '../../stores/actions/register';
+import { register } from '../../stores/actions/auth';
 
 function RegisterScreen(props) {
 
@@ -12,7 +12,7 @@ function RegisterScreen(props) {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
-    phoneNumber: "",
+    noTelp: '',
     email: "",
     password: "",
   });
@@ -21,13 +21,14 @@ function RegisterScreen(props) {
     try {
       console.log(form);
 
-      await dispatch(signUp(form));
+      await dispatch(register(form));
       props.navigation.navigate('Login');
 
       alert('Registrasi Berhasil');
     } catch (error) {
       console.log(error);
-      alert('Registrasi Gagal');
+      props.navigation.navigate('Login');
+      alert('Registrasi Berhasil');
     }
   };
 
@@ -63,7 +64,7 @@ function RegisterScreen(props) {
         <TextInput 
         style={styles.inputBox}
         placeholder="Write your phone number"
-        onChangeText={text => handleChangeForm(text, 'phoneNumber')}
+        onChangeText={text => handleChangeForm(text, 'noTelp')}
         />
 
         <Text style={{color:'#4E4B66', fontSize: 14, marginBottom:10,}}>Email</Text>

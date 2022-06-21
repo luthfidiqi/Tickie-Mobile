@@ -9,7 +9,9 @@ const {persistor, store} = stores;
 function App() {
     return (
       <Provider store={store}>
+        {/* <NativeBaseProvider> */}
           <MainstackNavigator />
+        {/* </NativeBaseProvider> */}
       </Provider>
     );
   }

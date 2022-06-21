@@ -45,6 +45,11 @@ function HomeNavigator() {
         name="Checkout"
         options={{headerShown: false}}
       />
+      <Stack.Screen
+        component={List}
+        name="List"
+        options={{headerShown: false}}
+      />
     </Stack.Navigator>
   );
 }
@@ -119,6 +124,9 @@ export default function AppNavigator() {
         options={{
           title: 'List Movie',
           header: props => <Header {...props} />,
+          drawerIcon: ({size, color}) => (
+            <Icon name="list" size={size} color={color} />
+          ),
         }}
       />
       <Drawer.Screen
@@ -127,6 +135,9 @@ export default function AppNavigator() {
         options={{
           title: 'Profile',
           header: props => <Header {...props} />,
+          drawerIcon: ({size, color}) => (
+            <Icon name="user" size={size} color={color} />
+          ),
         }}
       />
       <Drawer.Screen
@@ -135,6 +146,9 @@ export default function AppNavigator() {
         options={{
           title: 'Counter',
           header: props => <Header {...props} />,
+          drawerIcon: ({size, color}) => (
+            <Icon name="circle" size={size} color={color} />
+          ),
         }}
       />
     </Drawer.Navigator>

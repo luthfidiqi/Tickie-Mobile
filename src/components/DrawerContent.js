@@ -6,7 +6,7 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 
-// import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/Feather';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -35,9 +35,9 @@ function DrawerContent(props) {
       <View style={styles.containerSection}>
         <DrawerItem
           label="Logout"
-          // icon={({color, size}) => (
-          //   <Icon color={color} size={size} name="log-out" />
-          // )}
+          icon={({color, size}) => (
+            <Icon color={color} size={size} name="log-out" />
+          )}
           onPress={handleLogout}
         />
       </View>
