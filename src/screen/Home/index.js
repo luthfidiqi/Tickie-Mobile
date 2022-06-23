@@ -8,10 +8,6 @@ import CardHome from "../../components/CardHome";
 import Footer from "../../components/Footer";
 
 function HomeScreen(props) {
-  const handleDetail = () => {
-    props.navigation.navigate('Detail');
-  };
-
   const handleJoin = () => {
   };
 
@@ -35,6 +31,10 @@ function HomeScreen(props) {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleDetail = () => {
+    props.navigation.navigate(`Detail`);
   };
 
   return (
@@ -69,9 +69,12 @@ function HomeScreen(props) {
                     <Image source={{ uri: `https://res.cloudinary.com/luthfidiqi/image/upload/v1649598083/${item.image}`}} style={{width: 120, height: 180, borderRadius:6}}/>
                     <Text style={{color:'#14142B', fontSize: 14, marginTop:12,}}>{item.name}</Text>
                     <Text style={{color:'#A0A3BD', fontSize: 12, marginTop:5, marginBottom:25, maxWidth: 120, textAlign: 'center'}}>{item.category}</Text>
-                    <TouchableOpacity style={{width:'100%'}} onPress={handleDetail}>
+                    <TouchableOpacity style={{width:'100%'}} onPress={() => props.navigation.navigate('Detail', {data: item})}>
                       <Text style={styles.btnCard}>Details</Text>
                     </TouchableOpacity>
+                    {/* <TouchableOpacity style={{width:'100%'}} onPress={handleDetail}>
+                      <Text style={styles.btnCard}>Details</Text>
+                    </TouchableOpacity> */}
                   </View>
                 )}
               />
@@ -101,7 +104,7 @@ function HomeScreen(props) {
                     <Image source={{ uri: `https://res.cloudinary.com/luthfidiqi/image/upload/v1649598083/${item.image}`}} style={{width: 120, height: 180, borderRadius:6}}/>
                     <Text style={{color:'#14142B', fontSize: 14, marginTop:12,}}>{item.name}</Text>
                     <Text style={{color:'#A0A3BD', fontSize: 12, marginTop:5, marginBottom:25, maxWidth: 120, textAlign: 'center'}}>{item.category}</Text>
-                    <TouchableOpacity style={{width:'100%'}} onPress={handleDetail}>
+                    <TouchableOpacity style={{width:'100%'}} onPress={() => props.navigation.navigate('Detail', {data: item})}>
                       <Text style={styles.btnCard}>Details</Text>
                     </TouchableOpacity>
                   </View>

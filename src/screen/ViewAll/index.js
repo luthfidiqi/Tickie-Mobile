@@ -42,9 +42,7 @@ function ViewAll(props) {
     <ScrollView style={{backgroundColor: 'white', height: '100%',}}>
         <View>
           <View style={{paddingVertical: 40, paddingHorizontal:24,}}>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom:25}}>
-              <Text style={{color:'#14142B', fontSize: 16, fontWeight: 'bold'}}>List Movie</Text>
-            </View>
+            <Text style={{color:'#14142B', fontSize: 16, fontWeight: 'bold', marginBottom:25}}>List Movie</Text>
             <ScrollView horizontal={true} style={{marginBottom: 30,}}>
               <Text style={styles.btnDateActive}>September</Text>
               <Text style={styles.btnDate}>October</Text>
@@ -61,7 +59,7 @@ function ViewAll(props) {
                     <Image source={{ uri: `https://res.cloudinary.com/luthfidiqi/image/upload/v1649598083/${item.image}`}} style={{width: 110, height: 170, borderRadius:6}}/>
                     <Text style={{color:'#14142B', fontSize: 14, marginTop:12,}}>{item.name}</Text>
                     <Text style={{color:'#A0A3BD', fontSize: 12, marginTop:5, marginBottom:25, maxWidth: 120, textAlign: 'center'}}>{item.category}</Text>
-                    <TouchableOpacity style={{width:'100%'}} onPress={handleDetail}>
+                    <TouchableOpacity style={{width:'100%'}} onPress={() => props.navigation.navigate('Detail', {data: item})}>
                       <Text style={styles.btnCard}>Details</Text>
                     </TouchableOpacity>
                   </View>
