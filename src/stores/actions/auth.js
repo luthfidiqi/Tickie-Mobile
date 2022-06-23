@@ -6,3 +6,10 @@ export const register = data => {
     payload: axios.post('auth/register', data),
   };
 };
+
+export const getUser = (data) => {
+  return {
+    type: "GET_USER",
+    payload: axios.get(`user/${data}`)
+  };
+};

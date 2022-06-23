@@ -1,5 +1,6 @@
 const initialState = {
   data: [],
+  userData: {},
   isError: false,
   isLoading: false,
   msg: '',
@@ -31,6 +32,37 @@ const auth = (state = initialState, action) => {
         msg: action.payload.response.data.msg,
       };
     }
+
+    case 'GET_USER_PENDING': {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+        msg: '',
+        userData: {},
+      };
+    }
+    case 'GET_USER_FULFILLED': {
+      console.log(action.payload);
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        msg: action.payload.data.message,
+        userData: action.payload.data.data[0],
+        userSetData: action.payload.data.data[0],
+      };
+    }
+    case 'GET_USER_REJECTED': {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        msg: action.payload.response.data.message,
+        userData: {},
+      };
+    }
+
     default:
       return state;
   }

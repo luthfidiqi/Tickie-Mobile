@@ -16,7 +16,7 @@ function Order(props) {
 
   const handleCheckout = () => {
     if (selectedSeat.length < 1) {
-      ToastAndroid.show('Choose at least 1 seat to continue', 2000);
+      alert('Belum memilih seat');
     } else {
       props.navigation.navigate('Checkout', {
         dataBooking,
