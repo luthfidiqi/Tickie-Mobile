@@ -1,6 +1,6 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import Icon from 'react-native-vector-icons/Feather';
 
 const Stack = createNativeStackNavigator();
@@ -17,6 +17,8 @@ import Profile from '../screen/Profile';
 import History from '../screen/Profile/History';
 import Ticket from '../screen/Profile/Ticket';
 
+import Notification from '../screen/Notification';
+
 import DrawerContent from '../components/DrawerContent';
 import Header from '../components/Header';
 
@@ -28,27 +30,27 @@ function HomeNavigator() {
       <Stack.Screen
         component={Home}
         name="Home"
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         component={Detail}
         name="Detail"
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         component={Order}
         name="Order"
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         component={Checkout}
         name="Checkout"
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         component={List}
         name="List"
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -60,7 +62,7 @@ function ListNavigator() {
       <Stack.Screen
         component={List}
         name="List"
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -72,17 +74,17 @@ function ProfileNavigator() {
       <Stack.Screen
         component={Profile}
         name="Profile"
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         component={History}
         name="History"
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         component={Ticket}
         name="Ticket"
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -94,7 +96,19 @@ function CounterNavigator() {
       <Stack.Screen
         component={Counter}
         name="Counter"
-        options={{headerShown: false}}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function NotificationNavigator() {
+  return (
+    <Stack.Navigator initialRouteName="Notification">
+      <Stack.Screen
+        component={Notification}
+        name="Notification"
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
@@ -113,7 +127,7 @@ export default function AppNavigator() {
         options={{
           title: 'Home',
           header: props => <Header {...props} />,
-          drawerIcon: ({size, color}) => (
+          drawerIcon: ({ size, color }) => (
             <Icon name="home" size={size} color={color} />
           ),
         }}
@@ -124,7 +138,7 @@ export default function AppNavigator() {
         options={{
           title: 'List Movie',
           header: props => <Header {...props} />,
-          drawerIcon: ({size, color}) => (
+          drawerIcon: ({ size, color }) => (
             <Icon name="list" size={size} color={color} />
           ),
         }}
@@ -135,7 +149,7 @@ export default function AppNavigator() {
         options={{
           title: 'Profile',
           header: props => <Header {...props} />,
-          drawerIcon: ({size, color}) => (
+          drawerIcon: ({ size, color }) => (
             <Icon name="user" size={size} color={color} />
           ),
         }}
@@ -146,7 +160,18 @@ export default function AppNavigator() {
         options={{
           title: 'Counter',
           header: props => <Header {...props} />,
-          drawerIcon: ({size, color}) => (
+          drawerIcon: ({ size, color }) => (
+            <Icon name="circle" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        component={NotificationNavigator}
+        name="NotificationNavigator"
+        options={{
+          title: 'Notification',
+          header: props => <Header {...props} />,
+          drawerIcon: ({ size, color }) => (
             <Icon name="circle" size={size} color={color} />
           ),
         }}
