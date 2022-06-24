@@ -13,6 +13,8 @@ import styles from './styles';
 
 import axios from '../../utils/axios';
 
+import Notification from '../../utils/notif';
+
 import Footer from '../../components/Footer';
 
 function Checkout(props) {
@@ -77,7 +79,7 @@ function Checkout(props) {
   //   }
   // };
 
-  const toTicket = async () => {
+  const handlePayment = async () => {
     await AsyncStorage.getItem('id')
       .then(async value => {
         let userId = await value;
@@ -102,7 +104,16 @@ function Checkout(props) {
             console.log(res.data);
           });
 
-          alert('Checkout Berhasil');
+          const messageNotif = JSON.stringify(setData, null, ' ');
+
+          const setNotification = {
+            title: 'Checkout Berhasil',
+            message: `${messageNotif}`,
+          };
+          console.log(setNotification);
+          Notification.reminderCheckoutNotification(setNotification);
+
+          // alert('Checkout Berhasil');
         } catch (err) {
           alert(err);
           alert('Checkout Gagal');
@@ -314,7 +325,7 @@ function Checkout(props) {
           />
         </View>
 
-        <TouchableOpacity style={{ width: '100%' }} onPress={toTicket}>
+        <TouchableOpacity style={{ width: '100%' }} onPress={handlePayment}>
           <Text style={styles.btnBook}>Checkout Now</Text>
         </TouchableOpacity>
       </View>

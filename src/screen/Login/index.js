@@ -41,11 +41,12 @@ function LoginScreen(props) {
 
       const setNotification = {
         title: 'Success Login',
-        message: 'You can access the tickie',
-        date: new Date(Date.now()),
+        message: 'Lets booking ticket now!!!',
       };
       console.log(setNotification);
-      Notification.scheduleProductNotification(setNotification);
+      Notification.reminderLoginNotification(setNotification);
+
+      // Notification.reminderLoginNotification();
     } catch (error) {
       alert('Email atau password tidak sesuai');
       console.log(error);
