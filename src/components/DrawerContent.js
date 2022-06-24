@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItem,
@@ -7,13 +7,43 @@ import {
 } from '@react-navigation/drawer';
 
 import Icon from 'react-native-vector-icons/Feather';
+import axios from '../utils/axios';
+
+import Notification from '../utils/notif';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function DrawerContent(props) {
+  const [dataUser, setDataUser] = useState([]);
+
+  const getDataUser = async () => {
+    await AsyncStorage.getItem('id')
+      .then(async value => {
+        try {
+          const result = await axios.get(`user/${value}`);
+          setDataUser(result.data.data[0]);
+        } catch (error) {
+          console.log(error);
+        }
+      })
+      .then(res => {
+        console.log(res);
+      });
+  };
+
+  useEffect(() => {
+    getDataUser();
+  }, []);
+
   const handleLogout = async () => {
     try {
-      alert('Logout');
+      const setNotification = {
+        title: 'Log Out',
+        message: 'Please login again!!!',
+      };
+      console.log(setNotification);
+      Notification.reminderLoginNotification(setNotification);
+      // alert('Logout');
       await AsyncStorage.clear();
       props.navigation.navigate('AuthScreen', {
         screen: 'Login',
@@ -26,8 +56,10 @@ function DrawerContent(props) {
         <View style={styles.containerProfile}>
           <View style={styles.avatar} />
           <View style={styles.biodata}>
-            <Text style={styles.title}>Luthfi Thufail Asiddiqi</Text>
-            <Text style={styles.caption}>@luthfidiqi</Text>
+            <Text style={styles.title}>
+              {dataUser.firstName + ' ' + dataUser.lastName}
+            </Text>
+            <Text style={styles.caption}>{dataUser.email}</Text>
           </View>
         </View>
         <DrawerItemList {...props} />
@@ -35,7 +67,7 @@ function DrawerContent(props) {
       <View style={styles.containerSection}>
         <DrawerItem
           label="Logout"
-          icon={({color, size}) => (
+          icon={({ color, size }) => (
             <Icon color={color} size={size} name="log-out" />
           )}
           onPress={handleLogout}

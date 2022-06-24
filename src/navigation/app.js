@@ -172,7 +172,7 @@ export default function AppNavigator() {
           title: 'Notification',
           header: props => <Header {...props} />,
           drawerIcon: ({ size, color }) => (
-            <Icon name="circle" size={size} color={color} />
+            <Icon name="bell" size={size} color={color} />
           ),
         }}
       />
