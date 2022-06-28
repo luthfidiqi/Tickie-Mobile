@@ -17,12 +17,12 @@ import Profile from '../screen/Profile';
 import History from '../screen/Profile/History';
 import Ticket from '../screen/Profile/Ticket';
 
-import Notification from '../screen/Notification';
+// import Notification from '../screen/Notification';
 
 import DrawerContent from '../components/DrawerContent';
 import Header from '../components/Header';
 
-import Counter from '../screen/Counter';
+// import Counter from '../screen/Counter';
 
 function HomeNavigator() {
   return (
@@ -56,17 +56,17 @@ function HomeNavigator() {
   );
 }
 
-function ListNavigator() {
-  return (
-    <Stack.Navigator initialRouteName="List">
-      <Stack.Screen
-        component={List}
-        name="List"
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
-  );
-}
+// function ListNavigator() {
+//   return (
+//     <Stack.Navigator initialRouteName="List">
+//       <Stack.Screen
+//         component={List}
+//         name="List"
+//         options={{ headerShown: false }}
+//       />
+//     </Stack.Navigator>
+//   );
+// }
 
 function ProfileNavigator() {
   return (
@@ -90,29 +90,29 @@ function ProfileNavigator() {
   );
 }
 
-function CounterNavigator() {
-  return (
-    <Stack.Navigator initialRouteName="Counter">
-      <Stack.Screen
-        component={Counter}
-        name="Counter"
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
-  );
-}
+// function CounterNavigator() {
+//   return (
+//     <Stack.Navigator initialRouteName="Counter">
+//       <Stack.Screen
+//         component={Counter}
+//         name="Counter"
+//         options={{ headerShown: false }}
+//       />
+//     </Stack.Navigator>
+//   );
+// }
 
-function NotificationNavigator() {
-  return (
-    <Stack.Navigator initialRouteName="Notification">
-      <Stack.Screen
-        component={Notification}
-        name="Notification"
-        options={{ headerShown: false }}
-      />
-    </Stack.Navigator>
-  );
-}
+// function NotificationNavigator() {
+//   return (
+//     <Stack.Navigator initialRouteName="Notification">
+//       <Stack.Screen
+//         component={Notification}
+//         name="Notification"
+//         options={{ headerShown: false }}
+//       />
+//     </Stack.Navigator>
+//   );
+// }
 
 export default function AppNavigator() {
   return (
@@ -132,7 +132,7 @@ export default function AppNavigator() {
           ),
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         component={ListNavigator}
         name="ListNavigator"
         options={{
@@ -142,7 +142,7 @@ export default function AppNavigator() {
             <Icon name="list" size={size} color={color} />
           ),
         }}
-      />
+      /> */}
       <Drawer.Screen
         component={ProfileNavigator}
         name="ProfileNavigator"
@@ -154,7 +154,7 @@ export default function AppNavigator() {
           ),
         }}
       />
-      <Drawer.Screen
+      {/* <Drawer.Screen
         component={CounterNavigator}
         name="CounterNavigator"
         options={{
@@ -175,7 +175,7 @@ export default function AppNavigator() {
             <Icon name="bell" size={size} color={color} />
           ),
         }}
-      />
+      /> */}
     </Drawer.Navigator>
   );
 }

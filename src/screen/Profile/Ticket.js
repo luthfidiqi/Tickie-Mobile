@@ -45,15 +45,30 @@ function Ticket(props) {
 
   return (
     <ScrollView style={{ backgroundColor: '#F5F6F8', height: '100%' }}>
-      <View style={{ marginHorizontal: 24, marginVertical: 40 }}>
+      <View style={{ marginHorizontal: 24, marginTop: 40 }}>
         <View
-          style={{ backgroundColor: '#ffffff', padding: 24, borderRadius: 8 }}>
+          style={{
+            backgroundColor: '#ffffff',
+            padding: 24,
+            borderBottomWidth: 5,
+            borderStyle: 'dashed',
+            borderColor: '#5F2EEA',
+            borderRadius: 20,
+          }}>
           <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-            <Image
-              style={{ marginBottom: 20 }}
-              source={require('../../assets/qr.png')}
-            />
+            <TouchableOpacity>
+              <Image
+                style={{ marginBottom: 20 }}
+                source={require('../../assets/qr.png')}
+              />
+            </TouchableOpacity>
           </View>
+        </View>
+      </View>
+
+      <View style={{ marginHorizontal: 24, marginBottom: 40 }}>
+        <View
+          style={{ backgroundColor: '#ffffff', padding: 24, borderRadius: 20 }}>
           <View
             style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <View>
@@ -120,11 +135,12 @@ function Ticket(props) {
               Total
             </Text>
             <Text style={{ color: '#5F2EEA', fontSize: 16, fontWeight: '700' }}>
-              Rp {formatIDR(ticket.totalPayment)}
+              Rp {formatIDR(ticket.price)}
             </Text>
           </View>
         </View>
       </View>
+
       <Footer />
     </ScrollView>
   );

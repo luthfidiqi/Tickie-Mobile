@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import styles from './styles';
 
-// import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 import Footer from '../../components/Footer';
 
@@ -132,22 +132,39 @@ function Profile(props) {
     } catch (error) {}
   };
 
-  // const openCamera = ()=>{
-  //   const option = {
-  //     mediaType: 'photo',
-  //     quality: 1
-  //   }
-  //   launchCamera(option, (res)=>{
-  //     if(res.didCancel){
-  //       console.log('User Cancelled image picker')
-  //     }else if(res.errorCode){
-  //       console.log(res.errorMessage)
-  //     }else{
-  //       const data = res.assets
-  //       console.log(data)
-  //     }
-  //   })
-  // }
+  const openCamera = () => {
+    const option = {
+      mediaType: 'photo',
+      quality: 1,
+    };
+    launchCamera(option, res => {
+      if (res.didCancel) {
+        console.log('User Cancelled image picker');
+      } else if (res.errorCode) {
+        console.log(res.errorMessage);
+      } else {
+        const data = res.assets;
+        console.log(data);
+      }
+    });
+  };
+
+  const openGallery = () => {
+    const option = {
+      mediaType: 'photo',
+      quality: 1,
+    };
+    launchImageLibrary(option, res => {
+      if (res.didCancel) {
+        console.log('User Cancelled image picker');
+      } else if (res.errorCode) {
+        console.log(res.errorMessage);
+      } else {
+        const data = res.assets;
+        console.log(data);
+      }
+    });
+  };
 
   return (
     <ScrollView style={{ backgroundColor: '#F5F6F8', height: '100%' }}>
@@ -205,11 +222,44 @@ function Profile(props) {
             />
             {/* <Image source={require('../../assets/profile-img.png')} /> */}
 
-            {/* <Pressable style={{marginBottom:20 }} onPress={openCamera}>
-              <Text style={{backgroundColor:'#EFF0F6', paddingHorizontal:10, paddingVertical:5, borderRadius:20, color:'#5F2EEA', fontSize:14, fontWeight:'600' }}>
-                Open Camera
-              </Text>
-            </Pressable> */}
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Pressable style={{ marginBottom: 20 }} onPress={openCamera}>
+                <Text
+                  style={{
+                    backgroundColor: '#EFF0F6',
+                    paddingHorizontal: 10,
+                    paddingVertical: 5,
+                    borderRadius: 20,
+                    color: '#5F2EEA',
+                    fontSize: 14,
+                    fontWeight: '600',
+                    marginHorizontal: 5,
+                  }}>
+                  Camera
+                </Text>
+              </Pressable>
+
+              <Pressable style={{ marginBottom: 20 }} onPress={openGallery}>
+                <Text
+                  style={{
+                    backgroundColor: '#EFF0F6',
+                    paddingHorizontal: 10,
+                    paddingVertical: 5,
+                    borderRadius: 20,
+                    color: '#5F2EEA',
+                    fontSize: 14,
+                    fontWeight: '600',
+                    marginHorizontal: 5,
+                  }}>
+                  Gallery
+                </Text>
+              </Pressable>
+            </View>
 
             <Text
               style={{
