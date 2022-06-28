@@ -26,5 +26,23 @@ export default StyleSheet.create({
     borderRadius:4,
     borderWidth: 1,
     borderColor: '#DEDEDE',
-  }
+  },
+  btnPrim: {
+    backgroundColor: '#5F2EEA',
+    borderRadius: 12,
+    width: '100%',
+    paddingVertical: '5%',
+    alignItems: 'center',
+  },
+  btnDisable: {
+    backgroundColor: '#878aa3',
+    borderRadius: 12,
+    width: '100%',
+    paddingVertical: '5%',
+    alignItems: 'center',
+  },
+  btnPrimText: {
+    color: 'white',
+    fontWeight: '600'
+  },
 });

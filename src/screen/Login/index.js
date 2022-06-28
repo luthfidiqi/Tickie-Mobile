@@ -47,19 +47,34 @@ function LoginScreen(props) {
       Notification.reminderLoginNotification(setNotification);
 
       // Notification.reminderLoginNotification();
+      resetForm();
     } catch (error) {
       alert('Email atau password tidak sesuai');
       console.log(error);
+      resetForm();
     }
   };
   const handleChangeForm = (text, name) => {
     setForm({ ...form, [name]: text });
   };
 
+  const disabledBtn =
+  form.email ||
+  form.password 
+    ? false
+    : true;
+
+    const resetForm = () => {
+      setForm({
+        name: "",
+        password: "",
+      });
+    };
+
   return (
     <ScrollView style={styles.login}>
       <Image
-        style={{ marginBottom: 30 }}
+        style={{ marginBottom: 20 }}
         source={require('../../assets/logo-tickitz-color.png')}
       />
       <Text
@@ -81,6 +96,7 @@ function LoginScreen(props) {
         <TextInput
           style={styles.inputBox}
           placeholder="Write your email"
+          value={form.email}
           onChangeText={text => handleChangeForm(text, 'email')}
         />
 
@@ -90,11 +106,20 @@ function LoginScreen(props) {
         <TextInput
           style={styles.inputBox}
           placeholder="Write your password"
+          value={form.password}
           onChangeText={text => handleChangeForm(text, 'password')}
+          secureTextEntry={true}
         />
 
-        <View style={{ marginTop: 20 }}>
-          <Button title="Login" color="#5F2EEA" onPress={handleLogin} />
+        <View style={{ marginTop: 10 }}>
+          <TouchableOpacity
+              style={disabledBtn ? styles.btnDisable : styles.btnPrim}
+              onReset={resetForm}
+              onPress={handleLogin}
+              disabled={disabledBtn}>
+              <Text style={styles.btnPrimText}>Sign In</Text>
+          </TouchableOpacity>
+          {/* <Button title="Login" color="#5F2EEA" onPress={handleLogin} /> */}
         </View>
 
         <TouchableOpacity onPress={handleForgot}>

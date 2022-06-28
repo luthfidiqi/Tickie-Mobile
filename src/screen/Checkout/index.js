@@ -108,7 +108,8 @@ function Checkout(props) {
 
           const setNotification = {
             title: 'Checkout Berhasil',
-            message: `${messageNotif}`,
+            // message: `${messageNotif}`,
+            message: 'Tiket kamu berhasil dipesan.',
           };
           console.log(setNotification);
           Notification.reminderCheckoutNotification(setNotification);

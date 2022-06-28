@@ -8,6 +8,7 @@ import {
   Button,
   TextInput,
   FlatList,
+  StyleSheet,
   ActivityIndicator,
 } from 'react-native';
 import styles from './styles';
@@ -43,7 +44,7 @@ function ViewAll(props) {
   useEffect(() => {
     setTimeout(() => {
       getDataMovie();
-    }, 2000);
+    }, 3000);
   }, [page]);
 
   // const getDataMovie = async () => {
@@ -181,7 +182,7 @@ function ViewAll(props) {
                     {/* <Footer /> */}
                   </View>
                 ) : loading ? (
-                  <ActivityIndicator size="large" color="blue" />
+                  <ActivityIndicator size="large" color="#5F2EEA" />
                 ) : null
               }
             />

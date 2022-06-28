@@ -12,9 +12,14 @@ import styles from './styles';
 
 import axios from '../../utils/axios';
 
+import SelectDropdown from 'react-native-select-dropdown';
+import DatePicker from 'react-native-date-picker';
+
 import Footer from '../../components/Footer';
 
 function MovieDetail(props) {
+  const countries = ['Jakarta', 'Bogor', 'Bekasi', 'Tanggerang'];
+
   const [movieData, setMovieData] = useState(props.route.params.data);
   const [schedule, setSchedule] = useState([]);
   const [activeSchedule, setActiveSchedule] = useState('');
@@ -35,7 +40,7 @@ function MovieDetail(props) {
     movieId: movieData.id,
   });
   // const [activePage, setActivePage] = useState(1);
-  // const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   // const [openDD, setOpenDD] = useState(false);
   // const [value, setValue] = useState(null);
   const [location, setLocation] = useState('');
@@ -205,6 +210,71 @@ function MovieDetail(props) {
           Showtimes and Tickets
         </Text>
 
+        <View>
+          <TouchableOpacity
+            title="Open"
+            onPress={() => setOpen(true)}
+            style={{ width: '100%' }}
+            underlayColor="none">
+            <Text
+              style={{
+                width: '100%',
+                backgroundColor: '#EFF0F6',
+                borderRadius: 4,
+                padding: 20,
+                fontSize: 14,
+                color: '#4e4b66',
+                fontWeight: '500',
+                textAlign: 'center',
+              }}>
+              Set a date
+            </Text>
+          </TouchableOpacity>
+          {/* <Button title="Open" onPress={() => setOpen(true)} /> */}
+          <DatePicker
+            modal
+            open={open}
+            date={date}
+            onConfirm={date => {
+              setOpen(false);
+              setDate(date);
+            }}
+            onCancel={() => {
+              setOpen(false);
+            }}
+          />
+        </View>
+
+        <View style={{ marginVertical: 20 }}>
+          <SelectDropdown
+            buttonTextStyle={{
+              fontSize: 14,
+              color: '#4e4b66',
+              fontWeight: '500',
+            }}
+            defaultButtonText={'Set a city'}
+            buttonStyle={{
+              width: '100%',
+              backgroundColor: '#EFF0F6',
+              borderRadius: 4,
+            }}
+            data={countries}
+            onSelect={(selectedItem, index) => {
+              console.log(selectedItem, index);
+            }}
+            buttonTextAfterSelection={(selectedItem, index) => {
+              // text represented after item is selected
+              // if data array is an array of objects then return selectedItem.property to render after item is selected
+              return selectedItem;
+            }}
+            rowTextForSelection={(item, index) => {
+              // text represented for each item in dropdown
+              // if data array is an array of objects then return item.property to represent item in dropdown
+              return item;
+            }}
+          />
+        </View>
+
         {schedule.length > 0 ? (
           schedule.map(item => (
             <View
@@ -264,21 +334,6 @@ function MovieDetail(props) {
                   Rp {formatIDR(item.price)} / seat
                 </Text>
               </View>
-              {/* <TouchableOpacity 
-          style={{width: '100%'}} 
-          underlayColor="none"
-          onPress={async () =>
-            handleBook({
-            movieId: movie.id,
-            scheduleId: item.id,
-            premiere: item.premiere,
-            nameMovie: await AsyncStorage.getItem('nameMovie'),
-            date: new Date(date).toDateString(),
-            dateBooking: new Date(date).toISOString().split('T')[0],
-            time: selectedActiveTime,
-            })}>
-            <Text style={styles.btnBook}>Book Now</Text>
-          </TouchableOpacity> */}
               <TouchableOpacity
                 style={{ width: '100%' }}
                 underlayColor="none"

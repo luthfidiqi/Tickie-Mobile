@@ -40,6 +40,15 @@ function RegisterScreen(props) {
     props.navigation.navigate('Login');
   };
 
+  const disabledBtn =
+  form.firstName ||
+  form.lastName ||
+  form.noTelp ||
+  form.email ||
+  form.password 
+    ? false
+    : true;
+
   return (
     <ScrollView style={styles.login}>
       <Image style={{marginBottom: 30}} source={require('../../assets/logo-tickitz-color.png')} />
@@ -50,6 +59,7 @@ function RegisterScreen(props) {
         <TextInput 
         style={styles.inputBox}
         placeholder="Write your first name"
+        value={form.firstName}
         onChangeText={text => handleChangeForm(text, 'firstName')}
         />
         
@@ -57,6 +67,7 @@ function RegisterScreen(props) {
         <TextInput 
         style={styles.inputBox}
         placeholder="Write your last name"
+        value={form.lastName}
         onChangeText={text => handleChangeForm(text, 'lastName')}
         />
 
@@ -64,6 +75,7 @@ function RegisterScreen(props) {
         <TextInput 
         style={styles.inputBox}
         placeholder="Write your phone number"
+        value={form.noTelp}
         onChangeText={text => handleChangeForm(text, 'noTelp')}
         />
 
@@ -71,6 +83,7 @@ function RegisterScreen(props) {
         <TextInput 
         style={styles.inputBox}
         placeholder="Write your email"
+        value={form.email}
         onChangeText={text => handleChangeForm(text, 'email')}
         />
 
@@ -78,11 +91,19 @@ function RegisterScreen(props) {
         <TextInput 
         style={styles.inputBox}
         placeholder="Write your password"
+        value={form.password}
         onChangeText={text => handleChangeForm(text, 'password')}
+        secureTextEntry={true}
         />
         
         <View style={{marginTop:20,}}>
-          <Button title="Sign Up" color="#5F2EEA" onPress={handleSubmit} />
+          <TouchableOpacity
+              style={disabledBtn ? styles.btnDisable : styles.btnPrim}
+              onPress={handleSubmit}
+              disabled={disabledBtn}>
+              <Text style={styles.btnPrimText}>Sign Up</Text>
+          </TouchableOpacity>
+          {/* <Button title="Sign Up" color="#5F2EEA" onPress={handleSubmit} /> */}
         </View>
 
         <TouchableOpacity onPress={handleLogin}>

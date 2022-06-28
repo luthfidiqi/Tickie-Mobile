@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import {
   DrawerContentScrollView,
   DrawerItem,
@@ -9,7 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/Feather';
 import axios from '../utils/axios';
 
-import Notification from '../utils/notif';
+// import Notification from '../utils/notif';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -37,12 +37,12 @@ function DrawerContent(props) {
 
   const handleLogout = async () => {
     try {
-      const setNotification = {
-        title: 'Log Out',
-        message: 'Please login again!!!',
-      };
-      console.log(setNotification);
-      Notification.reminderLoginNotification(setNotification);
+      // const setNotification = {
+      //   title: 'Log Out',
+      //   message: 'Please login again!!!',
+      // };
+      // console.log(setNotification);
+      // Notification.reminderLoginNotification(setNotification);
       // alert('Logout');
       await AsyncStorage.clear();
       props.navigation.navigate('AuthScreen', {
@@ -54,7 +54,11 @@ function DrawerContent(props) {
     <View style={styles.container}>
       <DrawerContentScrollView {...props}>
         <View style={styles.containerProfile}>
-          <View style={styles.avatar} />
+        <Image
+          source={dataUser.image ? {uri: `${process.env.REACT_APP_URL_CLOUDINARY}/${dataUser.image}`} : {uri: `${process.env.REACT_APP_URL_CLOUDINARY}/Tickitz/user/blank-avatar_ddsbif`}}
+          style={{ width: 40, height: 40, borderRadius:40,}}
+        />
+          {/* <View style={styles.avatar} /> */}
           <View style={styles.biodata}>
             <Text style={styles.title}>
               {dataUser.firstName + ' ' + dataUser.lastName}

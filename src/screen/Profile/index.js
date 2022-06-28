@@ -8,8 +8,12 @@ import {
   Image,
   Button,
   TextInput,
+  SafeAreaView,
+  Pressable,
 } from 'react-native';
 import styles from './styles';
+
+// import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 
 import Footer from '../../components/Footer';
 
@@ -39,6 +43,7 @@ function Profile(props) {
     firstName: '',
     lastName: '',
     noTelp: '',
+    email: '',
   });
 
   const handleChangeForm = (text, name) => {
@@ -50,7 +55,8 @@ function Profile(props) {
       .then(async value => {
         try {
           const result = await axios.patch(`user/profile/${value}`, form);
-          alert(`${form.firstName}\n${form.lastName}\n${form.noTelp}`);
+          // alert(`${form.firstName}\n${form.lastName}\n${form.noTelp}`);
+          alert('Update profile berhasil');
         } catch (error) {
           console.log(error);
         }
@@ -83,9 +89,12 @@ function Profile(props) {
             `user/password/${value}`,
             formPassword,
           );
+          alert('Update password berhasil');
           // alert(`${form.firstName}\n${form.lastName}\n${form.noTelp}`);
+          resetFormPassword();
         } catch (error) {
           console.log(error);
+          resetFormPassword();
         }
       })
       .then(res => {
@@ -93,18 +102,53 @@ function Profile(props) {
       });
   };
 
+  const resetFormPassword = () => {
+    setFormPassword({
+      newPassword: '',
+      confirmPassword: '',
+    });
+  };
+
   const handleBtn = () => {
     // props.navigation.navigate();
   };
 
-  const handleLogout = async () => {
-    alert('Logout');
-    props.navigation.navigate('Login');
-  };
+  // const handleLogout = async () => {
+  //   alert('Logout');
+  //   props.navigation.navigate('Login');
+  // };
 
   const handleSwitch = async () => {
     props.navigation.navigate('History');
   };
+
+  const handleLogout = async () => {
+    try {
+      // alert('Logout');
+      await AsyncStorage.clear();
+      props.navigation.navigate('AuthScreen', {
+        screen: 'Login',
+      });
+    } catch (error) {}
+  };
+
+  // const openCamera = ()=>{
+  //   const option = {
+  //     mediaType: 'photo',
+  //     quality: 1
+  //   }
+  //   launchCamera(option, (res)=>{
+  //     if(res.didCancel){
+  //       console.log('User Cancelled image picker')
+  //     }else if(res.errorCode){
+  //       console.log(res.errorMessage)
+  //     }else{
+  //       const data = res.assets
+  //       console.log(data)
+  //     }
+  //   })
+  // }
+
   return (
     <ScrollView style={{ backgroundColor: '#F5F6F8', height: '100%' }}>
       <View
@@ -142,7 +186,31 @@ function Profile(props) {
             INFO
           </Text>
           <View style={{ alignItems: 'center' }}>
-            <Image source={require('../../assets/profile-img.png')} />
+            <Image
+              source={
+                dataUser.image
+                  ? {
+                      uri: `${process.env.REACT_APP_URL_CLOUDINARY}/${dataUser.image}`,
+                    }
+                  : {
+                      uri: `${process.env.REACT_APP_URL_CLOUDINARY}/Tickitz/user/blank-avatar_ddsbif`,
+                    }
+              }
+              style={{
+                width: 120,
+                height: 120,
+                borderRadius: 100,
+                marginBottom: 10,
+              }}
+            />
+            {/* <Image source={require('../../assets/profile-img.png')} /> */}
+
+            {/* <Pressable style={{marginBottom:20 }} onPress={openCamera}>
+              <Text style={{backgroundColor:'#EFF0F6', paddingHorizontal:10, paddingVertical:5, borderRadius:20, color:'#5F2EEA', fontSize:14, fontWeight:'600' }}>
+                Open Camera
+              </Text>
+            </Pressable> */}
+
             <Text
               style={{
                 color: '#14142B',
@@ -199,24 +267,36 @@ function Profile(props) {
           <TextInput
             style={styles.inputBox}
             placeholder="Write your Full Name"
-            onChangeText={text => handleChangeForm(text, 'firstName')}
-          />
+            onChangeText={text => handleChangeForm(text, 'firstName')}>
+            {dataUser.firstName}
+          </TextInput>
           <Text style={{ color: '#4E4B66', fontSize: 14, marginBottom: 10 }}>
             last Name
           </Text>
           <TextInput
             style={styles.inputBox}
             placeholder="Write your email"
-            onChangeText={text => handleChangeForm(text, 'lastName')}
-          />
+            onChangeText={text => handleChangeForm(text, 'lastName')}>
+            {dataUser.lastName}
+          </TextInput>
           <Text style={{ color: '#4E4B66', fontSize: 14, marginBottom: 10 }}>
             Phone Number
           </Text>
           <TextInput
             style={styles.inputBox}
             placeholder="Input your Phone  Number"
-            onChangeText={text => handleChangeForm(text, 'noTelp')}
-          />
+            onChangeText={text => handleChangeForm(text, 'noTelp')}>
+            {dataUser.noTelp}
+          </TextInput>
+          <Text style={{ color: '#4E4B66', fontSize: 14, marginBottom: 10 }}>
+            Email
+          </Text>
+          <TextInput
+            style={styles.inputBox}
+            placeholder="Input your email"
+            onChangeText={text => handleChangeForm(text, 'email')}>
+            {dataUser.email}
+          </TextInput>
         </View>
 
         <TouchableOpacity style={{ width: '100%' }} onPress={updateDataUser}>
@@ -247,6 +327,7 @@ function Profile(props) {
             style={styles.inputBox}
             placeholder="Write your new password"
             onChangeText={text => handleChangePassword(text, 'newPassword')}
+            secureTextEntry={true}
           />
 
           <Text style={{ color: '#4E4B66', fontSize: 14, marginBottom: 10 }}>
@@ -256,11 +337,13 @@ function Profile(props) {
             style={styles.inputBox}
             placeholder="Write your confirm password"
             onChangeText={text => handleChangePassword(text, 'confirmPassword')}
+            secureTextEntry={true}
           />
         </View>
 
         <TouchableOpacity
           style={{ width: '100%', marginBottom: 30 }}
+          onReset={resetFormPassword}
           onPress={updatePassword}>
           <Text style={styles.btnBook}>Update changes</Text>
         </TouchableOpacity>
