@@ -58,18 +58,14 @@ function LoginScreen(props) {
     setForm({ ...form, [name]: text });
   };
 
-  const disabledBtn =
-  form.email ||
-  form.password 
-    ? false
-    : true;
+  const disabledBtn = form.email || form.password ? false : true;
 
-    const resetForm = () => {
-      setForm({
-        name: "",
-        password: "",
-      });
-    };
+  const resetForm = () => {
+    setForm({
+      name: '',
+      password: '',
+    });
+  };
 
   return (
     <ScrollView style={styles.login}>
@@ -113,11 +109,11 @@ function LoginScreen(props) {
 
         <View style={{ marginTop: 10 }}>
           <TouchableOpacity
-              style={disabledBtn ? styles.btnDisable : styles.btnPrim}
-              onReset={resetForm}
-              onPress={handleLogin}
-              disabled={disabledBtn}>
-              <Text style={styles.btnPrimText}>Sign In</Text>
+            style={disabledBtn ? styles.btnDisable : styles.btnPrim}
+            onReset={resetForm}
+            onPress={handleLogin}
+            disabled={disabledBtn}>
+            <Text style={styles.btnPrimText}>Sign In</Text>
           </TouchableOpacity>
           {/* <Button title="Login" color="#5F2EEA" onPress={handleLogin} /> */}
         </View>

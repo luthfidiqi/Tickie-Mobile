@@ -5,8 +5,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const axiosApiIntances = axios.create({
   // baseURL: process.env.REACT_APP_URL_BE,
   // baseURL: URL_BE,
-  baseURL: 'http://192.168.1.3:3001', // ip:portbackend
+  // baseURL: 'http://192.168.1.3:3001', // ip:portbackend
   // baseURL: 'https://project-tickitz.herokuapp.com/',
+  baseURL: 'https://tickie-project.herokuapp.com/',
   // baseURL: 'http://localhost:3001/',
 });
 
